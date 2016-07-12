@@ -1,0 +1,11 @@
+<%= form_for Location.new do |f| %>
+  <div class="form-section">
+    <%= f.hidden_field :lat, id: 'lat-field'%>
+    <%= f.hidden_field :lng, id: 'lng-field'%>
+    <%= f.text_area :notes %>
+  </div>
+  <div class="form-section">
+    <%= f.submit 'Save', id:'save-button', disabled: 'true' %>
+  </div>
+<% end %>
+<% javascript_include_tag "locations.js" %>
