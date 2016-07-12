@@ -1,3 +1,5 @@
+<h2> New Sighting!</h2>
+<p>What did you find?</p>
 <%= form_for Location.new do |f| %>
   <div class="form-section">
     <%= f.hidden_field :lat, id: 'lat-field'%>
@@ -8,4 +10,4 @@
     <%= f.submit 'Save', id:'save-button', disabled: 'true' %>
   </div>
 <% end %>
-<% javascript_include_tag "locations.js" %>
+<div id='your-location'></div>
