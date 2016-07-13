@@ -1,13 +1,15 @@
-<h2> New Sighting!</h2>
-<p>What did you find?</p>
-<%= form_for Location.new do |f| %>
-  <div class="form-section">
-    <%= f.hidden_field :lat, id: 'lat-field'%>
-    <%= f.hidden_field :lng, id: 'lng-field'%>
-    <%= f.text_area :notes %>
-  </div>
-  <div class="form-section">
-    <%= f.submit 'Save', id:'save-button', disabled: 'true' %>
-  </div>
-<% end %>
+<div class="new-sighting">
+  <h2> New Sighting!</h2>
+  <p>What did you find?</p>
+  <%= form_for Location.new do |f| %>
+    <div class="form-section">
+      <%= f.hidden_field :lat, id: 'lat-field'%>
+      <%= f.hidden_field :lng, id: 'lng-field'%>
+      <%= f.collection_select :pokemon_id, @pokemon, :id, :name %>
+    </div>
+    <div class="form-section">
+      <%= f.submit 'Save', id:'save-button', disabled: 'true' %>
+    </div>
+  <% end %>
+</div>
 <div id='your-location'></div>

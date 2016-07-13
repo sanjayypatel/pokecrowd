@@ -1,7 +1,5 @@
 <% @locations.each do |location| %>
   <div class="sighting-card">
-    <h1><%= location.lat %></h1>
-    <h1><%= location.lng %></h1>
-    <h1><%= location.notes %></h1>
+    <h1><%= location.pokemon.name %></h1>
   </div>
 <% end %>

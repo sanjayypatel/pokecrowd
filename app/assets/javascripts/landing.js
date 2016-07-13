@@ -1,6 +1,6 @@
 $(document).ready(function(){
-  var latField = document.getElementById('lat-field');
-  if(latField !== null){
+if($('.locations.landing').length){
+    var latField = document.getElementById('lat-field');
     var lngField = document.getElementById('lng-field');
     var saveButton = document.getElementById('save-button');
     if ("geolocation" in navigator) {
@@ -22,8 +22,23 @@ $(document).ready(function(){
 
         // Add a red circle at current location
         map.on('load', function() {
-          map.addSource("points", {
-          "type": "geojson",
+          map.addSource("points", createPointsJSON(lng, lat));
+          map.addLayer(createLayerJSON("points"));
+        });
+
+
+        // enable save button after location load.
+        saveButton.removeAttribute('disabled');
+      });
+    } else {
+      console.error("Could not access location data.");
+    }
+  }
+});
+
+var createPointsJSON = function(lng, lat){
+  return {
+            "type": "geojson",
             "data": {
               "type": "FeatureCollection",
               "features": [{
@@ -34,27 +49,18 @@ $(document).ready(function(){
                   }
               }]
             }
-          });
-          map.addLayer({
-              "id": "points",
-              "type": "circle",
-              "source": "points",
-              "paint": {
-                "circle-radius": 8,
-                "circle-color": "#db004c"
+          }
+}
 
-              }
-          });
-        });
+var createLayerJSON = function(source) {
+  return {
+      "id": "points",
+      "type": "circle",
+      "source": source,
+      "paint": {
+        "circle-radius": 8,
+        "circle-color": "#db004c"
 
-
-        // enable save button after location load.
-        saveButton.removeAttribute('disabled');
-      });
-    } else {
-      console.log("no");
-    }
+      }
   }
-});
-
-
+}
